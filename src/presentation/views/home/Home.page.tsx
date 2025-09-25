@@ -5,8 +5,10 @@ import styles from './style/Styles.module.css'
 const Home = () => {
   return (
     <div className={styles.container}>
-      <CardActive />
-      <SelectTask />
+      <div className={styles.box}>
+        <CardActive />
+        <SelectTask />      
+      </div>
     </div>
   )
 }
