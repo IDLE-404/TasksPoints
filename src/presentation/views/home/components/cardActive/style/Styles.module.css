@@ -1,0 +1,51 @@
+.container{
+    display: grid;
+    grid-template-columns: repeat(4, 300px);
+    justify-content: center;
+    height: 200px;
+    align-items: center;
+    gap: 2rem;
+    margin-top: 4rem;
+}
+
+.cardContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
+    border: solid rgb(248, 242, 242);
+    box-shadow: 0 10 10px rgb(143, 143, 143);
+    padding: 1.5rem;
+    border-radius: 14px;
+    height: 150px;
+    transition: 0.2s;
+}
+.cardContainer:hover{
+    transition: 0.2s;
+    box-shadow: 0 10px 70px rgba(114, 114, 114, 0.295);
+}
+.context{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.context span{
+    font-weight: 700;
+}
+.context p{
+    opacity: 50%;
+}
+.bar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.icon{
+    padding: 1rem;
+    border: solid 0.7px;
+    border-radius: 14px;
+}
+.bar p{
+    font-size: 2rem;
+    font-weight: 700;
+}
