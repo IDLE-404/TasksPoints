@@ -3,7 +3,7 @@ import { Tasks } from '@/data/datasources/local/data';
 import styles from './style/Styles.module.css';
 
 const Search = () => {
-  const [tasks] = useState(Tasks);
+  const [tasks, setTasks] = useState(Tasks);
   const [filter, setFilter] = useState("all");
   const [search, setSearch] = useState("");
 
@@ -23,6 +23,12 @@ const Search = () => {
     }
 
     return filtered;
+  };
+
+  const toggleTask = (id: number) => {
+    setTasks(tasks.map(task =>
+      task.id === id && !task.completed ? { ...task, completed: true } : task
+    ));
   };
 
   return (
@@ -47,10 +53,17 @@ const Search = () => {
       <ul className={styles.taskList}>
         {getFilterReadTasks().map(task => (
           <li key={task.id} className={styles.taskItem}>
-            {task.text}
-            <span className={styles.taskStatus}>
-              {task.completed ? "выполнено" : "не выполнено"}
-            </span>
+            <span className={task.completed ? styles.doneText : ""}>{task.text}</span>
+
+            <button
+              onClick={() => toggleTask(task.id)}
+              className={styles.completedBtn}
+              disabled={task.completed}
+            >
+              {task.completed ? "✔" : "✅ Выполнить"}
+            </button>
+            
+            <span className={styles.taskStatus}>{task.completed ? "выполнено" : "не выполнено"}</span>
           </li>
         ))}
       </ul>

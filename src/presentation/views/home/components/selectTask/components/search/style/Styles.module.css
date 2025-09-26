@@ -1,4 +1,3 @@
-
 .searchContainer {
     display: flex;
     gap: 1rem;
@@ -66,4 +65,24 @@
 .taskStatus {
     font-style: italic;
     color: #888;
+}
+.doneText {
+    text-decoration: line-through;
+    color: #888;
+}
+.completedBtn {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 12px;
+    background: none;
+    cursor: pointer;
+}
+
+.completedBtn span {
+    visibility:hidden;
+}
+
+.completedBtn.done {
+    background-color: #6c757d;
+    color: #fff;
 }
