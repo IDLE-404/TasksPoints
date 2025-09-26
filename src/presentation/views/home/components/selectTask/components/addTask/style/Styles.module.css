@@ -36,6 +36,24 @@
 }
 .filter{
     display: flex;
+    width: 100%;
     justify-content: space-around;
-    border: solid red;
+    gap: 2rem ;
+}
+.filter button{
+    border: none;
+    border-radius: 14px;
+    padding: 0.8rem 2rem;
+    font-size: 14px;
+    font-weight: 600;
+    background-color: #2563eb ;
+    cursor: pointer;
+    color: white;
+    box-shadow: 0 0 15px rgba(151, 151, 151, 0.5);
+    transition: 0.3s;
+    width: 100px;
+}
+
+.search{
+    width: 100%;
 }

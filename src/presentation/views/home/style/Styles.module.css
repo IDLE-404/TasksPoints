@@ -3,5 +3,11 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border: solid;
+}
+
+
+.box{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
 }

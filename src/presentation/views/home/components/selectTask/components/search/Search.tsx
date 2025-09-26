@@ -1,43 +1,61 @@
-import React, { type CSSProperties } from 'react';
+import React, { useState } from 'react';
+import { Tasks } from '@/data/datasources/local/data';
+import styles from './style/Styles.module.css';
 
-import Select from 'react-select';
-import {
-  type ColourOption,
-  colourOptions,
-  type FlavourOption,
-  type GroupedOption,
-  groupedOptions,
-} from './data';
+const Search = () => {
+  const [tasks] = useState(Tasks);
+  const [filter, setFilter] = useState("all");
+  const [search, setSearch] = useState("");
 
-const groupStyles = {
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-between',
+  const getFilterReadTasks = () => {
+    let filtered = tasks;
+
+    if (search.trim() !== "") {
+      filtered = filtered.filter(task =>
+        task.text.toLowerCase().includes(search.toLowerCase())
+      );
+    }
+
+    if (filter === "active") {
+      filtered = filtered.filter(task => !task.completed);
+    } else if (filter === "completed") {
+      filtered = filtered.filter(task => task.completed);
+    }
+
+    return filtered;
+  };
+
+  return (
+    <div className={styles.container}>
+      <div className={styles.searchContainer}>
+        <input
+          type="text"
+          placeholder="Search"
+          value={search}
+          onChange={e => setSearch(e.target.value)}
+          className={styles.searchInput}
+        />
+
+        <select value={filter} onChange={e => setFilter(e.target.value)} className={styles.searchSelect}>
+          <option value="all">Все</option>
+          <option value="active">Активные</option>
+          <option value="completed">Выполненные</option>
+        </select>
+      </div>
+      
+
+      <ul className={styles.taskList}>
+        {getFilterReadTasks().map(task => (
+          <li key={task.id} className={styles.taskItem}>
+            {task.text}
+            <span className={styles.taskStatus}>
+              {task.completed ? "выполнено" : "не выполнено"}
+            </span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 };
-const groupBadgeStyles: CSSProperties = {
-  backgroundColor: '#EBECF0',
-  borderRadius: '2em',
-  color: '#172B4D',
-  display: 'inline-block',
-  fontSize: 12,
-  fontWeight: 'normal',
-  lineHeight: '1',
-  minWidth: 1,
-  padding: '0.16666666666667em 0.5em',
-  textAlign: 'center',
-};
 
-const formatGroupLabel = (data: GroupedOption) => (
-  <div style={groupStyles}>
-    <span>{data.label}</span>
-    <span style={groupBadgeStyles}>{data.options.length}</span>
-  </div>
-);
-
-export default () => (
-  <Select<ColourOption | FlavourOption, false, GroupedOption>
-    defaultValue={colourOptions[1]}
-    options={groupedOptions}
-    formatGroupLabel={formatGroupLabel}
-  />
-);
+export default Search;

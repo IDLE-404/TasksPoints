@@ -1,3 +1,4 @@
+
 import Search from '../search/Search'
 import styles from './style/Styles.module.css'
 
@@ -14,8 +15,9 @@ const AddTask = () => {
       </div>
 
       <div className={styles.filter}>
-        <Search />
-        <button>All</button>
+        <div className={styles.search}>
+          <Search />
+        </div>
       </div>
     </div>
   )
